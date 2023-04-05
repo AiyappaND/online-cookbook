@@ -4,6 +4,8 @@ import {Routes, Route} from "react-router";
 import Home from './home-component'
 import Navbar from './navigation-component'
 import Profile from './profile-component'
+import Contact from "./contact-component";
+import About from "./about-component";
 
 function Cookbook() {
     return(
@@ -14,8 +16,11 @@ function Cookbook() {
                 </div>
                 <div className="col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 p-1">
                     <Routes>
-                        <Route path="/"    element={<Home/>}/>
+                        <Route index
+                               element={<Home/>}/>
                         <Route path="profile" element={<Profile/>}/>
+                        <Route path="contact" element={<Contact/>}/>
+                        <Route path="about" element={<About/>}/>
                     </Routes>
                 </div>
             </div>
