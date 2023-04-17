@@ -1,85 +1,58 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { submitContactForm } from '../redux/actions';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
 
-const ContactPage = ({ submitContactForm }) => {
-    const history = useHistory();
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-    });
+function RecipeContactForm() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+    const [submitted, setSubmitted] = useState(false);
 
-    const handleChange = (event) => {
-        setFormData({ ...formData, [event.target.name]: event.target.value });
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        submitContactForm(formData);
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        history.push('/');
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post("/api/contact", { name, email, message });
+            setSubmitted(true);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
-        <div className="container">
-            <h1>Contact Us</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Name</label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your name.."
-                    required
-                />
-
-                <label htmlFor="email">Email</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Your email.."
-                    required
-                />
-
-                <label htmlFor="subject">Subject</label>
-                <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    placeholder="Subject.."
-                    required
-                />
-
-                <label htmlFor="message">Message</label>
-                <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Write something.."
-                    required
-                ></textarea>
-
-                <button type="submit">Submit</button>
-            </form>
+        <div>
+            {!submitted ? (
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="name">Name:</label>
+                    <input
+                        id="name"
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
+                    <label htmlFor="email">Email:</label>
+                    <input
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <label htmlFor="message">Message:</label>
+                    <textarea
+                        id="message"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        required
+                    ></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            ) : (
+                <p>Thank you for contacting us!</p>
+            )}
         </div>
     );
-};
+}
 
-const mapDispatchToProps = (dispatch) => ({
-    submitContactForm: (formData) => dispatch(submitContactForm(formData)),
-});
-
-export default connect(null, mapDispatchToProps)(ContactPage);
+export default RecipeContactForm;
 
 
