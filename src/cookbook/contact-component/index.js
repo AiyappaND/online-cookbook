@@ -1,16 +1,26 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { submitContactForm } from '../redux/actions';
+import { useHistory } from 'react-router-dom';
 
-function ContactForm() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [subject, setSubject] = useState('');
-    const [message, setMessage] = useState('');
+const ContactPage = ({ submitContactForm }) => {
+    const history = useHistory();
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+    });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // do something with form data
-        console.log(name, email, subject, message);
+    const handleChange = (event) => {
+        setFormData({ ...formData, [event.target.name]: event.target.value });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        submitContactForm(formData);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        history.push('/');
     };
 
     return (
@@ -22,19 +32,21 @@ function ContactForm() {
                     type="text"
                     id="name"
                     name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="Your name.."
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    required
                 />
 
                 <label htmlFor="email">Email</label>
                 <input
-                    type="text"
+                    type="email"
                     id="email"
                     name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="Your email.."
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    required
                 />
 
                 <label htmlFor="subject">Subject</label>
@@ -42,24 +54,32 @@ function ContactForm() {
                     type="text"
                     id="subject"
                     name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
                     placeholder="Subject.."
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
+                    required
                 />
 
                 <label htmlFor="message">Message</label>
                 <textarea
                     id="message"
                     name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     placeholder="Write something.."
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
+                    required
                 ></textarea>
 
-                <input type="submit" value="Submit" />
+                <button type="submit">Submit</button>
             </form>
         </div>
     );
-}
+};
 
-export default ContactForm;
+const mapDispatchToProps = (dispatch) => ({
+    submitContactForm: (formData) => dispatch(submitContactForm(formData)),
+});
+
+export default connect(null, mapDispatchToProps)(ContactPage);
+
+
