@@ -1,9 +1,11 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import { useSelector } from "react-redux";
 import {useLocation} from "react-router";
 
 
 const NavBar = () => {
+    const { currentUser } = useSelector((state) => state.user);
     const {pathname} = useLocation();
     const paths = pathname.split('/')
     const active = paths[1];
@@ -13,14 +15,19 @@ const NavBar = () => {
             <Link to="/" className={`list-group-item ${active === ''?'active':''}`}>
                 Home
             </Link>
-            {/*TODO: Fix later after adding login*/}
-            <a href="/" className={`list-group-item
-                    ${active === 'login'?'active':''}`}>
+
+            {!currentUser && <Link to="/login" className={`list-group-item ${active === 'login'?'active':''}`}>
                 Login
-            </a>
-            <Link to="profile" className={`list-group-item ${active === 'profile'?'active':''}`}>
+            </Link>}
+
+            {!currentUser && <Link to="/register" className={`list-group-item ${active === 'register'?'active':''}`}>
+                Register
+            </Link>}
+
+            {currentUser  && <Link to="/profile" className={`list-group-item ${active === 'profile'?'active':''}`}>
                 Profile
-            </Link>
+            </Link>}
+
             <Link to="about" className={`list-group-item ${active === 'about'?'active':''}`}>
                 About
             </Link>
