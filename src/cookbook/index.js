@@ -13,6 +13,7 @@ import ProfileScreen from "./profile-component";
 
 import authReducer from "./reducers/auth-reducer"
 import {Provider} from "react-redux";
+import RegisterComponent from "./register-component";
 
 const store = configureStore(
     {reducer: {user: authReducer}});
@@ -36,6 +37,7 @@ function Cookbook() {
                                    element={<LoginScreen />} />
                             <Route path="profile"
                                    element={<ProfileScreen />} />
+                            <Route path="register" element={<RegisterComponent/>} />
                         </Routes>
                     </div>
                 </div>
