@@ -28,6 +28,10 @@ const NavBar = () => {
                 Profile
             </Link>}
 
+            {(currentUser && currentUser?.isAuthor) && <Link to="/createrecipe" className={`list-group-item ${active === 'createrecipe'?'active':''}`}>
+                Create Recipe
+            </Link>}
+
             <Link to="about" className={`list-group-item ${active === 'about'?'active':''}`}>
                 About
             </Link>
