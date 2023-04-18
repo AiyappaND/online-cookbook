@@ -36,19 +36,23 @@ function ContactScreen() {
         return isValid;
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const isValid = validateForm();
         if (isValid) {
-            // Send the form data to the backend or an email address
-            console.log(formData);
-            alert("Your message has been sent!");
-            setFormData({
-                name: "",
-                email: "",
-                subject: "",
-                message: "",
-            });
+            try {
+                await dispatch(sendContactForm(formData));
+                alert("Your message has been sent!");
+                setFormData({
+                    name: "",
+                    email: "",
+                    subject: "",
+                    message: "",
+                });
+            } catch (error) {
+                alert("Failed to send message. Please try again.");
+                console.log(error);
+            }
         }
     };
 
