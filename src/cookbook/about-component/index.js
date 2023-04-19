@@ -13,7 +13,7 @@ function About() {
                         <h5>Palna Patel</h5>
                     </div>
                     <div className="row">
-                        <img src="/images/me.jpg" className="rounded-circle w-100" height={500}/>
+                        <img src="/images/me.jpg" className="rounded-circle w-100" height={500} alt=""/>
                     </div>
                     <div className="row">
                         <p>                                  </p>
@@ -25,7 +25,7 @@ function About() {
                         <h5>Aiyappa Deviah</h5>
                     </div>
                     <div className="row">
-                        <img src="/images/aiyappa.png" className="rounded-circle w-100" height={500}/>
+                        <img src="/images/aiyappa.png" className="rounded-circle w-100" height={500} alt=""/>
                     </div>
                     <div className="row">
                         <p>                                  </p>
@@ -37,7 +37,7 @@ function About() {
                         <h5>Amy Ku</h5>
                     </div>
                     <div className="row">
-                        <img src="/images/amy.png" className="rounded-circle w-100" height={500}/>
+                        <img src="/images/amy.png" className="rounded-circle w-100" height={500} alt=""/>
                     </div>
                     <div className="row">
                         <p>                                  </p>

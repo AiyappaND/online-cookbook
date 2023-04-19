@@ -16,6 +16,7 @@ import {Provider} from "react-redux";
 import RegisterComponent from "./register-component";
 import CreateRecipe from "./create-recipe-component";
 import recipeReducer from "./reducers/recipe-reducer";
+import ViewRecipe from "./view-recipe-component";
 
 const store = configureStore(
     {reducer: {user: authReducer, recipeData: recipeReducer}});
@@ -41,6 +42,7 @@ function Cookbook() {
                                    element={<ProfileScreen />} />
                             <Route path="register" element={<RegisterComponent/>} />
                             <Route path="createrecipe" element={<CreateRecipe/>}/>
+                            <Route path="recipe/:rid" element={<ViewRecipe/>}/>
                         </Routes>
                     </div>
                 </div>
