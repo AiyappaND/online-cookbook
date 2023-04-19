@@ -6,9 +6,17 @@ import Navbar from './navigation-component'
 import Profile from './profile-component'
 import Contact from "./contact-component";
 import About from "./about-component";
+import {Provider} from "react-redux";
+import { configureStore }
+    from '@reduxjs/toolkit';
+import recipeReducer
+    from "./recipe-list/recipe-reducer";
+const store = configureStore({
+    reducer: {recipe: recipeReducer}});
 
 function Cookbook() {
     return(
+        <Provider store={store}>
         <div className="container mt-1">
             <div className="row gx-4">
                 <div className="col-xxl-2 col-xl-2 col-lg-1 col-md-2 col-sm-2 col-2 p-1">
@@ -25,6 +33,7 @@ function Cookbook() {
                 </div>
             </div>
         </div>
+        </Provider>
     );
 }
 export default Cookbook
