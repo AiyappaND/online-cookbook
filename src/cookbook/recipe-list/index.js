@@ -5,7 +5,7 @@ import './index.css';
 
 const RecipeList = () => {
     const recipeArray = useSelector(
-        (state) => state.recipe);
+        (state) => state.recipeData.recipeList);
     return(
 
             <div className="wrapper">

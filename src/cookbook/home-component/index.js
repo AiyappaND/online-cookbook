@@ -1,14 +1,10 @@
-import {Card} from "react-bootstrap";
-import RecipeCard from "../recipe-list/recipe-card";
-import {Link} from "react-router-dom";
 import RecipeList from "../recipe-list";
 
 function Home() {
     return(
         <>
             <div className="row">
-                <p>                                                                            </p>
-
+                <p/>
             </div>
             <div className="row center align-items-center">
                 <h1 className="text-center">Welcome! Come join our community or recipes...</h1>
@@ -23,8 +19,7 @@ function Home() {
                 <div className="col-2"></div>
             </div>
             <div className="row">
-                <p>                                                                            </p>
-
+                <p/>
             </div>
 
             <div className="row center align-items-center">
@@ -35,12 +30,8 @@ function Home() {
             <div className="row center align-items-center">
                 <div className="col-4">
                     <RecipeList></RecipeList>
-
                 </div>
-
             </div>
-
-
         </>
     );
 }

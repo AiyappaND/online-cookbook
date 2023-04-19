@@ -1,10 +1,9 @@
 import React from "react";
-import {useNavigate} from "react-router";
 import {Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
 const RecipeCard = (
     {
-        recipe: recipe= {
+        recipe= {
             "image": "pizza.jpg",
             "title": "Margherita Pizza",
             "url" :"/"
