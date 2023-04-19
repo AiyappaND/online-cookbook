@@ -82,9 +82,8 @@ function CreateRecipe() {
                     ingredients: [...ingredients],
                 };
                 setCurrentRecipe(changedRecipe);
-                await dispatch(createRecipeThunk(currentRecipe)).unwrap();
-                //TODO: Change navigation
-                navigate("/profile");
+                let createdRecipe = await dispatch(createRecipeThunk(currentRecipe)).unwrap();
+                navigate(`/recipe/${createdRecipe._id}`);
             }
         } catch (e) {
             alert(e.message);

@@ -8,11 +8,12 @@ import recipeArray from "../recipe-list/recipes.json"
 
 const authSlice = createSlice({
     name: "recipe",
-    initialState: { currentRecipe: null, recipeList: recipeArray},
+    initialState: { currentRecipe: null, latestRecipeList: recipeArray},
     reducers: {},
     extraReducers: {
         [createRecipeThunk.fulfilled]: (state, { payload }) => {
             state.currentRecipe = payload;
+            console.log(state.currentRecipe)
         },
         [findOneRecipeThunk.fulfilled]: (state, { payload }) => {
             state.currentRecipe = payload;
