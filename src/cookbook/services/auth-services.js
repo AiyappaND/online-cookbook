@@ -23,6 +23,11 @@ export const profile = async () => {
     return response.data;
 };
 
+export const anonymousProfile = async (username) => {
+    const response = await api.get(`${USERS_URL}/${username}`);
+    return response.data;
+}
+
 
 export const updateUser = async (user) => {
     const response = await api.put(`${USERS_URL}/${user._id}`, user);
