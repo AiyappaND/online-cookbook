@@ -12,3 +12,15 @@ export const findOneRecipeThunk = createAsyncThunk(
     "recipes/findOneRecipe", async (rid) => {
         return await recipeService.findOneRecipe(rid);
     });
+
+export const findLocalRecipesByNameThunk = createAsyncThunk(
+    "recipes/findLocalRecipeByTitle", async (recipeTitle) => {
+        return await recipeService.findLocalRecipesByTitle(recipeTitle);
+    }
+)
+
+export const getLatestRecipesThunk = createAsyncThunk(
+    "recipes/getLatestRecipes", async () => {
+        return await recipeService.getLatestRecipes();
+    }
+)
