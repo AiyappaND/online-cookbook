@@ -9,6 +9,16 @@ export const createRecipe = async (recipe) => {
 };
 
 export const findOneRecipe = async (recipeId) => {
-    const response = await axios.get(`${RECIPES_URL}/${recipeId}`);
+    const response = await axios.get(`${RECIPES_URL}/getOne/${recipeId}`);
+    return response.data;
+}
+
+export const findLocalRecipesByTitle = async (recipeTitle) => {
+    const response = await axios.get(`${RECIPES_URL}/findLocal/${recipeTitle}`);
+    return response.data;
+}
+
+export const getLatestRecipes = async () => {
+    const response = await axios.get(`${RECIPES_URL}/`);
     return response.data;
 }

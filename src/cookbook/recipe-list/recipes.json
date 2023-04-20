@@ -1,8 +1,0 @@
-[
-  {"_id" : 123, "image": "sushi.jpg", "title": "California Rolls", "url" :  "/"},
-  {"_id" : 234, "image": "pizza.jpg", "title": "Margherita Pizza", "url" :  "/"},
-  {"_id" : 456, "image": "padthai.jpg", "title": "Pad Thai", "url" :  "/"},
-  {"_id" : 789, "image": "butter-chicken.jpg", "title": "Butter Chicken", "url" :  "/"},
-  {"_id" : 101, "image": "fries.jpg", "title": "Classic Garlic Fries", "url" :  "/"},
-  {"_id" : 121, "image": "pumpkin-soup.jpg", "title": "Pumpkin Soup", "url" :  "/"}
-]
