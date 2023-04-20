@@ -17,6 +17,7 @@ import RegisterComponent from "./register-component";
 import CreateRecipe from "./create-recipe-component";
 import recipeReducer from "./reducers/recipe-reducer";
 import ViewRecipe from "./view-recipe-component";
+import AnonymousProfileScreen from "./anonymous-profile-component";
 
 const store = configureStore(
     {reducer: {user: authReducer, recipeData: recipeReducer}});
@@ -43,6 +44,7 @@ function Cookbook() {
                             <Route path="register" element={<RegisterComponent/>} />
                             <Route path="createrecipe" element={<CreateRecipe/>}/>
                             <Route path="recipe/:rid" element={<ViewRecipe/>}/>
+                            <Route path="profile/:username" element={<AnonymousProfileScreen/>}/>
                         </Routes>
                     </div>
                 </div>

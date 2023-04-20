@@ -13,6 +13,12 @@ export const profileThunk = createAsyncThunk(
         return await authService.profile();
     });
 
+export const anonymousProfileThunk = createAsyncThunk(
+    "auth/anonymousProfile", async (username) => {
+        return await authService.anonymousProfile(username)
+    }
+);
+
 
 export const logoutThunk = createAsyncThunk(
     "auth/logout", async () => {
