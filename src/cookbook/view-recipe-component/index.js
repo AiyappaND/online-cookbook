@@ -3,10 +3,13 @@ import {findOneRecipeThunk} from "../services/recipe-thunks";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Button, Card, Container, Form, Row} from "react-bootstrap";
+import {createOrUpdateBookmarkThunk, getBookmarkThunk} from "../services/bookmark-thunks";
 
 function ViewRecipe() {
     const params  = useParams();
     const { currentUser } = useSelector((state) => state.user);
+    const [bookmarkList, setBookmarkList] = useState({});
+    const [bookmarkedRecipes, setBookmarkedRecipes] = useState([]);
     const recipeId = params.rid;
     const dispatch = useDispatch();
     const [recipeToView, setRecipeToView] = useState({});
@@ -19,6 +22,37 @@ function ViewRecipe() {
         fetchRecipeData();
         // eslint-disable-next-line
     }, []);
+
+    useEffect( () => {
+        const fetchBookmarks = async () => {
+            if (currentUser?.isPremium) {
+                const { payload } = await dispatch(getBookmarkThunk(currentUser?.username));
+                setBookmarkList(payload)
+                const bookmarkIds = (bookmarkList?.bookmarks?.map(bookmark => bookmark.recipeId));
+                setBookmarkedRecipes(bookmarkIds)
+            }
+        }
+        fetchBookmarks();
+        // eslint-disable-next-line
+    }, [recipeToView]);
+
+    const addToBookmarks = async () => {
+        const newBookMarkedList = [...bookmarkedRecipes, recipeToView._id];
+        setBookmarkedRecipes(newBookMarkedList);
+        const newBookmarkData = [...bookmarkList.bookmarks, {recipeId: recipeId, isLocal: true}];
+        const bookMarkDataToUpdate = {...bookmarkList, bookmarks: newBookmarkData}
+        const { payload } = await dispatch(createOrUpdateBookmarkThunk(bookMarkDataToUpdate));
+        setBookmarkList(payload);
+    }
+
+    const removeFromBookmarks = async () => {
+        const newBookMarkedList = bookmarkedRecipes.filter(bookmark => bookmark !== recipeId)
+        setBookmarkedRecipes(newBookMarkedList);
+        const newBookmarkData = bookmarkList.bookmarks.filter(bookmark => bookmark.recipeId !== recipeId)
+        const bookMarkDataToUpdate = {...bookmarkList, bookmarks: newBookmarkData}
+        const { payload } = await dispatch(createOrUpdateBookmarkThunk(bookMarkDataToUpdate));
+        setBookmarkList(payload);
+    }
 
 
 
@@ -67,10 +101,19 @@ function ViewRecipe() {
                                             <Form.Control as="textarea" rows={10} value={recipeToView.process} readOnly={true}/>
                                         </Form.Group>
                                         {
-                                            currentUser && currentUser.isPremium && (
+                                            currentUser && !bookmarkedRecipes?.includes(recipeToView._id) && (
                                                 <div className="d-grid">
-                                                    <Button variant="primary">
+                                                    <Button variant="primary" onClick={addToBookmarks}>
                                                         Bookmark Recipe
+                                                    </Button>
+                                                </div>
+                                            )
+                                        }
+                                        {
+                                            currentUser && bookmarkedRecipes?.includes(recipeToView._id) && (
+                                                <div className="d-grid">
+                                                    <Button variant="primary" onClick={removeFromBookmarks}>
+                                                        Remove from bookmarks
                                                     </Button>
                                                 </div>
                                             )

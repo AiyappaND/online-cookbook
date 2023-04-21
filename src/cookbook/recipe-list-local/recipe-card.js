@@ -10,7 +10,7 @@ const RecipeCard = (
     const navigate = useNavigate();
     return(
         <Card style={{ width: '18rem' }}>
-            <Card.Img  variant="top" src={`/images/${(recipe.image? recipe.image: "cooking.png")}`} />
+            <Card.Img className="p-3" variant="top" src={`/images/${(recipe.image? recipe.image: "cooking.png")}`} />
             <Card.Body>
                 <Card.Title>{recipe.title}</Card.Title>
                 <Card.Text>
@@ -19,10 +19,10 @@ const RecipeCard = (
                 <Card.Text>
                     Cuisine: {recipe.cuisine}
                 </Card.Text>
-                <Button variant="primary m-1" onClick={() => {navigate(`recipe/${recipe._id}`)}}>View Recipe</Button>
+                <Button variant="primary m-1" onClick={() => {navigate(`/recipe/${recipe._id}`)}}>View Recipe</Button>
                 {
                     (recipe.local_source &&
-                        <Button variant="primary m-1" onClick={() => {navigate(`profile/${recipe.author}`)}}>View Author</Button>)
+                        <Button variant="primary m-1" onClick={() => {navigate(`/profile/${recipe.author}`)}}>View Author</Button>)
                 }
             </Card.Body>
         </Card>

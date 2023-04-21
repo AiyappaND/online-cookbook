@@ -18,9 +18,10 @@ import CreateRecipe from "./create-recipe-component";
 import recipeReducer from "./reducers/recipe-reducer";
 import ViewRecipe from "./view-recipe-component";
 import AnonymousProfileScreen from "./anonymous-profile-component";
+import bookmarkReducer from "./reducers/bookmark-reducer";
 
 const store = configureStore(
-    {reducer: {user: authReducer, recipeData: recipeReducer}});
+    {reducer: {user: authReducer, recipeData: recipeReducer, bookmarkData: bookmarkReducer}});
 
 function Cookbook() {
     return(

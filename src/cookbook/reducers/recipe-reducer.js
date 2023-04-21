@@ -1,12 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-    createRecipeThunk, findOneRecipeThunk, findLocalRecipesByNameThunk, getLatestRecipesThunk
+    createRecipeThunk,
+    findOneRecipeThunk,
+    findLocalRecipesByNameThunk,
+    getLatestRecipesThunk,
+    getRecipesByAuthorUsernameThunk
 } from "../services/recipe-thunks";
 
 
 const authSlice = createSlice({
     name: "recipe",
-    initialState: { currentRecipe: null, latestRecipeList: [], searchedLocalRecipeList: [], searchedRemoteRecipeList: []},
+    initialState: { currentRecipe: null, latestRecipeList: [], searchedLocalRecipeList: [], searchedRemoteRecipeList: [], authorRecipeList: []},
     reducers: {},
     extraReducers: {
         [createRecipeThunk.fulfilled]: (state, { payload }) => {
@@ -20,6 +24,12 @@ const authSlice = createSlice({
         },
         [getLatestRecipesThunk.fulfilled]: (state, { payload }) => {
             state.latestRecipeList = payload;
+        },
+        [getLatestRecipesThunk.fulfilled]: (state, { payload }) => {
+            state.latestRecipeList = payload;
+        },
+        [getRecipesByAuthorUsernameThunk.fulfilled]: (state, { payload }) => {
+            state.authorRecipeList = payload;
         },
     },
 });
