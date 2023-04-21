@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {useLocation, useNavigate} from "react-router";
 import { Button } from "react-bootstrap";
 import {logoutThunk} from "../services/auth-thunks";
+import './index.css';
 
 
 const NavBar = () => {
@@ -14,38 +15,50 @@ const NavBar = () => {
     const paths = pathname.split('/');
     const active = paths[1];
     return (
-        <div className="list-group">
-            <div className="list-group-item">Online Cookbook</div>
-            <Link to="/" className={`list-group-item ${active === ''?'active':''}`}>
-                Home
-            </Link>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a className="navbar-brand my-2 mx-4">Online Cookbook</a>
+            <div className="collapse navbar-collapse">
+                <ul className="navbar-nav">
+                    <li className={`nav-item ${active === ''?'active':''}`}>
+                        <Link to="/" className="nav-link">
+                            Home
+                        </Link>
+                    </li>
+                    {!currentUser &&  <li className={`nav-item ${active === 'login'?'active':''}`}>
+                        <Link to="/login" className="nav-link">
+                                Login
+                        </Link>
+                    </li>}
+                    {!currentUser && <li className={`nav-item ${active === 'register'?'active':''}`}>
+                        <Link to="/register" className="nav-link">
+                            Register
+                        </Link>
+                    </li>}
+                    {currentUser  && <li className={`nav-item ${active === 'profile'?'active':''}`}>
+                        <Link to="/profile" className="nav-link">
+                            Profile
+                        </Link>
+                    </li>}
+                    {(currentUser && currentUser?.isAuthor) && <li className={`nav-item ${active === 'createrecipe'?'active':''}`}>
+                        <Link to="/createrecipe" className="nav-link">
+                            Create Recipe
+                        </Link>
+                    </li>}
+                    <li className={`nav-item ${active === 'about'?'active':''}`}>
+                        <Link to="about" className="nav-link">
+                            About
+                        </Link>
+                    </li>
 
-            {!currentUser && <Link to="/login" className={`list-group-item ${active === 'login'?'active':''}`}>
-                Login
-            </Link>}
-
-            {!currentUser && <Link to="/register" className={`list-group-item ${active === 'register'?'active':''}`}>
-                Register
-            </Link>}
-
-            {currentUser  && <Link to="/profile" className={`list-group-item ${active === 'profile'?'active':''}`}>
-                Profile
-            </Link>}
-
-            {(currentUser && currentUser?.isAuthor) && <Link to="/createrecipe" className={`list-group-item ${active === 'createrecipe'?'active':''}`}>
-                Create Recipe
-            </Link>}
-
-            <Link to="about" className={`list-group-item ${active === 'about'?'active':''}`}>
-                About
-            </Link>
-            {(currentUser) && <Button className={`list-group-item`} variant="secondary" onClick={() => {
+            {(currentUser) && <Button className={`nav-item`} variant="secondary" onClick={() => {
                 dispatch(logoutThunk());
                 navigate("/");
             }}>
                 Logout
             </Button>}
-        </div>
+                </ul>
+            </div>
+        </nav>
     );
 };
 export default NavBar;
