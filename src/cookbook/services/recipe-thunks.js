@@ -24,3 +24,9 @@ export const getLatestRecipesThunk = createAsyncThunk(
         return await recipeService.getLatestRecipes();
     }
 )
+
+export const getRecipesByAuthorUsernameThunk = createAsyncThunk(
+    "recipes/getRecipesByUsername", async (username) => {
+        return await recipeService.getRecipesByUsername(username);
+    }
+)

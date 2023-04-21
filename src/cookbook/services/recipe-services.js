@@ -22,3 +22,8 @@ export const getLatestRecipes = async () => {
     const response = await axios.get(`${RECIPES_URL}/`);
     return response.data;
 }
+
+export const getRecipesByUsername = async (username) => {
+    const response = await axios.get(`${RECIPES_URL}/findByUsername/${username}`);
+    return response.data;
+}

@@ -1,19 +1,7 @@
-import React, {useEffect} from "react";
+import React from "react";
 import RecipeListLocal from "../recipe-list-local";
-import {useDispatch} from "react-redux";
-import {getLatestRecipesThunk} from "../services/recipe-thunks";
 
 function Home() {
-    const dispatch = useDispatch();
-
-    useEffect( () => {
-        const fetchLatestRecipes = async () => {
-            await dispatch(getLatestRecipesThunk()).unwrap();
-        }
-        fetchLatestRecipes();
-        // eslint-disable-next-line
-    }, []);
-
     return(
         <>
             <div className="row">
