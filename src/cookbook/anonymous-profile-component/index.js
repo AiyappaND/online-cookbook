@@ -50,7 +50,7 @@ function AnonymousProfileScreen() {
             if (currentUser?.isPremium) {
                 const { payload } = await dispatch(getBookmarkThunk(username));
                 setBookmarks(payload)
-                const bookmarkIds = (bookmarks?.bookmarks.map(bookmark => bookmark.recipeId));
+                const bookmarkIds = (bookmarks?.bookmarks?.map(bookmark => bookmark.recipeId));
                 setBookmarkedRecipes(latestRecipeList.filter(recipe => bookmarkIds.includes(recipe._id)));
             }
         }
