@@ -8,7 +8,7 @@ import {createOrUpdateBookmarkThunk, getBookmarkThunk} from "../services/bookmar
 function ViewRecipe() {
     const params  = useParams();
     const { currentUser } = useSelector((state) => state.user);
-    const [bookmarkList, setBookmarkList] = useState({});
+    const [bookmarkList, setBookmarkList] = useState({username: currentUser?.username, bookmarks: []});
     const [bookmarkedRecipes, setBookmarkedRecipes] = useState([]);
     const recipeId = params.rid;
     const dispatch = useDispatch();
@@ -21,15 +21,19 @@ function ViewRecipe() {
         }
         fetchRecipeData();
         // eslint-disable-next-line
-    }, []);
+    }, [recipeToView]);
 
     useEffect( () => {
         const fetchBookmarks = async () => {
             if (currentUser?.isPremium) {
                 const { payload } = await dispatch(getBookmarkThunk(currentUser?.username));
-                setBookmarkList(payload)
-                const bookmarkIds = (bookmarkList?.bookmarks?.map(bookmark => bookmark.recipeId));
-                setBookmarkedRecipes(bookmarkIds)
+                if (payload){
+                    setBookmarkList(payload)
+                }
+                const bookmarkIds = (payload?.bookmarks?.map(bookmark => bookmark.recipeId));
+                if (bookmarkIds) {
+                    setBookmarkedRecipes(bookmarkIds)
+                }
             }
         }
         fetchBookmarks();

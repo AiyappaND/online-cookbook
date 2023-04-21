@@ -228,7 +228,7 @@ function ProfileScreen() {
                                         <div className="d-grid">
                                             <Button variant="secondary" onClick={() => {
                                                 dispatch(logoutThunk());
-                                                navigate("/login");
+                                                navigate("/home");
                                             }}>
                                                 Logout
                                             </Button>

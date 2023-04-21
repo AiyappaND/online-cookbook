@@ -1,13 +1,17 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import { useSelector } from "react-redux";
-import {useLocation} from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import {useLocation, useNavigate} from "react-router";
+import { Button } from "react-bootstrap";
+import {logoutThunk} from "../services/auth-thunks";
 
 
 const NavBar = () => {
     const { currentUser } = useSelector((state) => state.user);
     const {pathname} = useLocation();
-    const paths = pathname.split('/')
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const paths = pathname.split('/');
     const active = paths[1];
     return (
         <div className="list-group">
@@ -35,6 +39,12 @@ const NavBar = () => {
             <Link to="about" className={`list-group-item ${active === 'about'?'active':''}`}>
                 About
             </Link>
+            {(currentUser) && <Button className={`list-group-item`} variant="secondary" onClick={() => {
+                dispatch(logoutThunk());
+                navigate("/");
+            }}>
+                Logout
+            </Button>}
         </div>
     );
 };

@@ -13,7 +13,7 @@ function LoginScreen() {
         try {
             event.preventDefault();
             await dispatch(loginThunk({username, password})).unwrap();
-            navigate("/profile");
+            navigate("/");
         } catch (e) {
             if(e.code === "ERR_BAD_REQUEST") {
                 alert("User does not exist, please sign up");
