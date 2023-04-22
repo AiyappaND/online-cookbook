@@ -20,6 +20,7 @@ import ViewRecipe from "./view-recipe-component";
 import AnonymousProfileScreen from "./anonymous-profile-component";
 import bookmarkReducer from "./reducers/bookmark-reducer";
 import SearchResults from "./search-results-component";
+import ViewRemoteRecipe from "./view-remote-recipes";
 
 const store = configureStore(
     {reducer: {user: authReducer, recipeData: recipeReducer, bookmarkData: bookmarkReducer}});
@@ -46,6 +47,7 @@ function Cookbook() {
                             <Route path="register" element={<RegisterComponent/>} />
                             <Route path="createrecipe" element={<CreateRecipe/>}/>
                             <Route path="recipe/:rid" element={<ViewRecipe/>}/>
+                            <Route path ="remoteRecipe/:searchTerm/:rid" element={<ViewRemoteRecipe/>}></Route>
                             <Route path="profile/:username" element={<AnonymousProfileScreen/>}/>
                             <Route path="search/:searchTerm" element={<SearchResults/>}/>
                         </Routes>

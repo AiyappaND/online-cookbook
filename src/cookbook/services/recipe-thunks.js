@@ -36,3 +36,9 @@ export const findRemoteRecipesByNameThunk = createAsyncThunk(
         return await recipeService.findRemoteRecipesByTitle(recipeTitle);
     }
 )
+
+export const findRemoteRecipesByIdThunk = createAsyncThunk(
+    "recipes/findRemoteRecipeById", async (recipeId) => {
+        return await recipeService.findRemoteRecipeDetails(recipeId);
+    }
+)

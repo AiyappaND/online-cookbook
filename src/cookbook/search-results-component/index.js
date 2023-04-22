@@ -23,7 +23,8 @@ const SearchResults = () => {
     useEffect( () => {
         const fetchRemoteRecipesBySearchTerm = async () => {
             const { payload }  = await dispatch(findRemoteRecipesByNameThunk(searchTerm));
-            setRemoteApiRecipes(payload);
+            console.log(payload.results);
+            setRemoteApiRecipes(payload.results);
         }
         fetchRemoteRecipesBySearchTerm();
         // eslint-disable-next-line
@@ -66,8 +67,9 @@ const SearchResults = () => {
                             {
                                 remoteApiRecipes.map(recipe =>
                                     <RecipeCard
-                                        key={recipe._id}
+                                        key={recipe.id}
                                         recipe={recipe}
+                                        searchTerm={searchTerm}
                                     />
                                 )
                             }
