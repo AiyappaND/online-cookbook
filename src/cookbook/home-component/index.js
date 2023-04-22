@@ -5,13 +5,25 @@ import RecipeCard from "../recipe-list-local/recipe-card";
 import {getRecipesByAuthorUsernameThunk} from "../services/recipe-thunks";
 import {getBookmarkThunk} from "../services/bookmark-thunks";
 import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router";
 
 function Home() {
     const { currentUser } = useSelector((state) => state.user);
     const { latestRecipeList } = useSelector((state) => state.recipeData);
     const [authoredRecipes, setAuthoredRecipes] = useState([]);
     const [bookmarkedRecipes, setBookmarkedRecipes] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("")
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const searchRecipes = () => {
+        if (searchTerm === "" || searchTerm === undefined || searchTerm ===  null) {
+            alert("You need to enter a valid search term");
+        }
+        else {
+            navigate(`/search/${searchTerm}`);
+        }
+    }
 
     useEffect( () => {
         const fetchBookmarks = async () => {
@@ -48,8 +60,12 @@ function Home() {
                 <div className="col">
                     <div className="input-group">
                         <input type="search" className="form-control rounded" placeholder="What recipe are you looking for?" aria-label="Search"
-                                   aria-describedby="search-addon"/>
-                        <button type="button" className="btn btn-outline-danger">search</button>
+                                   aria-describedby="search-addon" onChange={(event) => {
+                            const term = event.target.value;
+                            setSearchTerm(term);
+                        }
+                        }/>
+                        <button type="button" className="btn btn-outline-danger" onClick={searchRecipes}>search</button>
                     </div>
                 </div>
                 <div className="col-2"></div>

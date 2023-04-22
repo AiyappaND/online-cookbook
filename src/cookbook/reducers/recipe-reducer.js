@@ -4,7 +4,7 @@ import {
     findOneRecipeThunk,
     findLocalRecipesByNameThunk,
     getLatestRecipesThunk,
-    getRecipesByAuthorUsernameThunk
+    getRecipesByAuthorUsernameThunk, findRemoteRecipesByNameThunk
 } from "../services/recipe-thunks";
 
 
@@ -30,6 +30,9 @@ const authSlice = createSlice({
         },
         [getRecipesByAuthorUsernameThunk.fulfilled]: (state, { payload }) => {
             state.authorRecipeList = payload;
+        },
+        [findRemoteRecipesByNameThunk.fulfilled]: (state, { payload }) => {
+            state.searchedRemoteRecipeList = payload;
         },
     },
 });
