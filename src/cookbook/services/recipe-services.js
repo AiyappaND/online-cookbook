@@ -18,6 +18,12 @@ export const findLocalRecipesByTitle = async (recipeTitle) => {
     return response.data;
 }
 
+export const findRemoteRecipesByTitle = async (recipeTitle) => {
+    //TODO: Link to external API
+    const response = {data: []}
+    return response.data;
+}
+
 export const getLatestRecipes = async () => {
     const response = await axios.get(`${RECIPES_URL}/`);
     return response.data;
