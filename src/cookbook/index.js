@@ -47,6 +47,8 @@ function Cookbook() {
                             <Route path ="remoteRecipe/:searchTerm/:rid" element={<ViewRemoteRecipe/>}></Route>
                             <Route path="profile/:username" element={<AnonymousProfileScreen/>}/>
                             <Route path="search/:searchTerm" element={<SearchResults/>}/>
+                            <Route path="contact" element={<Contact/>}/>
+                            <Route path="admin/contact-list" element={<ContactList/>}/>
                         </Routes>
                     </div>
                 </div>

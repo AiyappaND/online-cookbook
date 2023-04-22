@@ -49,6 +49,16 @@ const NavBar = () => {
                             About
                         </Link>
                     </li>
+                    <li className={`nav-item ${active === 'contact-list'?'active':''}`}>
+                        <Link to="admin/contact-list" className="nav-link">
+                            Contact List
+                        </Link>
+                    </li>
+                    <li className={`nav-item ${active === 'contact'?'active':''}`}>
+                        <Link to="contact" className="nav-link">
+                            Contact
+                        </Link>
+                    </li>
 
             {(currentUser) && <Button className={`nav-item`} variant="secondary" onClick={() => {
                 dispatch(logoutThunk());
