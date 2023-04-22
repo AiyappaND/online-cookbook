@@ -82,7 +82,7 @@ function CreateRecipe() {
                     ingredients: [...ingredients],
                 };
                 setCurrentRecipe(changedRecipe);
-                let createdRecipe = await dispatch(createRecipeThunk(currentRecipe)).unwrap();
+                let createdRecipe = await dispatch(createRecipeThunk(changedRecipe)).unwrap();
                 navigate(`/recipe/${createdRecipe._id}`);
             }
         } catch (e) {
