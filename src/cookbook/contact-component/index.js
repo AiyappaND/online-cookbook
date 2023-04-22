@@ -23,58 +23,42 @@ function Contact() {
                                 <div className="mb-3">
                                     <Form onSubmit={handleContact}>
                                         <Form.Group className="mb-3 row" controlId="name">
-                                            <div className='col-md-4'>
-                                                <Form.Label className="text-center">
-                                                    Name
+                                                <Form.Label>
+                                                    Name:
                                                 </Form.Label>
-                                            </div>
-                                            <div className="col-md-7">
                                                 <Form.Control type="text" placeholder="Enter Name"
                                                               required
                                                               onChange={(event) => setName(event.target.value)} />
-                                            </div>
 
                                         </Form.Group>
 
                                         <Form.Group className="mb-3 row" controlId="email">
-                                            <div className="col-md-4">
-                                                <Form.Label className="text-center">
-                                                    Email
+                                                <Form.Label>
+                                                    Email:
                                                 </Form.Label>
-                                            </div>
-                                            <div className="col-md-7">
                                                 <Form.Control type="email" placeholder="Enter Email"
                                                               required
                                                               onChange={(event) => setEmail(event.target.value)} />
-                                            </div>
 
 
                                         </Form.Group>
 
                                         <Form.Group className="mb-3 row" controlId="subject">
-                                            <div className="col-md-4">
-                                                <Form.Label>Topic/Subject</Form.Label>
-                                            </div>
-                                            <div className="col-md-7">
+                                                <Form.Label>Subject:</Form.Label>
                                                 <Form.Control type="text"
-                                                              placeholder="Enter Topic/Subject"
+                                                              placeholder="Enter Subject"
                                                               required
                                                               onChange={(event) => setSubject(event.target.value)} />
-                                            </div>
 
                                         </Form.Group>
                                         <Form.Group className="mb-3 row" controlId="content">
-                                            <div className="col-md-4">
-                                                <Form.Label>Content</Form.Label>
-                                            </div>
-                                            <div className="col-md-7">
+                                                <Form.Label>Message:</Form.Label>
                                                 <Form.Control as=
                                                                   'textarea' type="test"
                                                               rows={5}
-                                                              placeholder="Enter Content"
+                                                              placeholder="Enter Message"
                                                               required
                                                               onChange={(event) => setMessage(event.target.value)} />
-                                            </div>
 
                                         </Form.Group>
 

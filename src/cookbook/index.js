@@ -21,6 +21,7 @@ import AnonymousProfileScreen from "./anonymous-profile-component";
 import bookmarkReducer from "./reducers/bookmark-reducer";
 import SearchResults from "./search-results-component";
 import ViewRemoteRecipe from "./view-remote-recipes";
+import ContactList from "./contact-list-component";
 
 const store = configureStore(
     {reducer: {user: authReducer, recipeData: recipeReducer, bookmarkData: bookmarkReducer}});

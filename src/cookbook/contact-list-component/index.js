@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Card } from "react-bootstrap";
 
 function ContactList() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([{"name": "name", "email": "email", "subject" : "subject", "message" : "xyz"}]);
 
     const handleStatus = async (event, item) => {
         try {
@@ -20,7 +20,9 @@ function ContactList() {
     return (
         <div>
             <Container>
+                <div className="mb-3 mt-md-4"></div>
                 <h2 className="fw-bold mb-2 text-center text-uppercase ">Contact's List</h2>
+                <div className="mb-3"></div>
 
                 {data.length>0 ? data.map((item, index)=>{
                     return (
@@ -29,8 +31,8 @@ function ContactList() {
                                 <p><strong>Name</strong>: {item.name}</p>
                                 <p><strong>Email</strong>: {item.email}</p>
                                 <p><strong>Topic</strong>: {item.subject}</p>
-                                <p><strong>Content</strong>: {item.message}</p>
-                                <p><button className={`${item.read ? 'btn btn-success':'btn btn-danger'}`}
+                                <p><strong>Message</strong>: {item.message}</p>
+                                <p className="text-center"><button className={`${item.read ? 'btn btn-success':'btn btn-danger'}`}
                                            onClick={(e)=>{handleStatus(e,item)}}>Mark as Read</button></p>
                             </Card.Body>
                         </Card>
@@ -39,6 +41,7 @@ function ContactList() {
 
             </Container>
         </div>
+
     );
 
 }
