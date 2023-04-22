@@ -28,12 +28,9 @@ const store = configureStore(
 function Cookbook() {
     return(
         <Provider store={store}>
-            <div className="container mt-1">
                 <div className="row gx-4">
-                    <div className="col-xxl-2 col-xl-2 col-lg-1 col-md-2 col-sm-2 col-2 p-1">
                         <Navbar/>
-                    </div>
-                    <div className="col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 p-1">
+                    <div className="row gx-4">
                         <Routes>
                             <Route index
                                    element={<Home/>}/>
@@ -53,7 +50,6 @@ function Cookbook() {
                         </Routes>
                     </div>
                 </div>
-            </div>
         </Provider>
     );
 }
