@@ -1,15 +1,74 @@
 import React, { useState, useEffect } from "react";
 import { Container, Card } from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router";
+import {getContactThunk, updateContactThunk} from "../services/contact-thunks";
 
 function ContactList() {
-    const [data, setData] = useState([{"name": "name", "email": "email", "subject" : "subject", "message" : "xyz"}]);
+    const { currentUser } = useSelector((state) => state.user);
+    const [unreadMessages, setUnreadMessages] = useState([]);
+    const [readMessages, setReadMessages] = useState([]);
+    const [dataToShow, setDataToShow] = useState([]);
+    const [unreadToggle, setUnreadToggle] = useState(true);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const handleStatus = async (event, item) => {
+    useEffect( () => {
+        const checkLoggedInUser = async () => {
+            if (!currentUser || !currentUser?.isAdmin) {
+                alert("You don't have permission to view this page");
+                navigate("/");
+            }
+        }
+        checkLoggedInUser();
+        // eslint-disable-next-line
+    }, []);
+
+    useEffect(() => {
+        const fetchInitialData = async () => {
+            const { payload }  = await dispatch(getContactThunk());
+            let newReadData = [];
+            let newUnreadData = [];
+
+            payload.map(item => item.read? newReadData.push(item): newUnreadData.push(item))
+            setReadMessages(newReadData)
+            setUnreadMessages(newUnreadData)
+            unreadToggle? setDataToShow(newUnreadData): setDataToShow(newReadData)
+        }
+        fetchInitialData();
+        // eslint-disable-next-line
+    }, [])
+
+
+    const toggleMessageRead = async (event, item) => {
         try {
-            console.log(event, item);
+            let itemToSwitch = {...item}
+            itemToSwitch.read = !itemToSwitch.read;
+            let newUnreadMessages = [...unreadMessages];
+            let newReadMessages = [...readMessages];
+
+            if (itemToSwitch.read) {
+                newUnreadMessages = newUnreadMessages.filter(message => message._id !== itemToSwitch._id)
+                setUnreadMessages(newUnreadMessages);
+
+                newReadMessages.push(itemToSwitch);
+                setReadMessages(newReadMessages);
+            }
+            else {
+                newReadMessages = newReadMessages.filter(message => message._id !== itemToSwitch._id)
+                setReadMessages(newReadMessages);
+
+                newUnreadMessages.push(itemToSwitch);
+                setUnreadMessages(newUnreadMessages);
+            }
+
+            unreadToggle? setDataToShow(newUnreadMessages): setDataToShow(newReadMessages);
+
+            await dispatch(updateContactThunk(itemToSwitch));
+
         } catch (e) {
             if(e.code === "ERR_BAD_REQUEST") {
-                alert("List does not exist, please sign up");
+                alert("Operation failed");
             }
             else {
                 alert(e.message);
@@ -17,14 +76,24 @@ function ContactList() {
         }
     };
 
+    const toggleMessagesToShow = () => {
+        const newToggle = !unreadToggle;
+        setUnreadToggle(newToggle);
+        newToggle? setDataToShow(unreadMessages): setDataToShow(readMessages)
+    };
+
     return (
         <div>
             <Container>
                 <div className="mb-3 mt-md-4"></div>
-                <h2 className="fw-bold mb-2 text-center text-uppercase ">Contact's List</h2>
+                <h2 className="fw-bold mb-2 text-center text-uppercase ">Feedback List</h2>
                 <div className="mb-3"></div>
+                <p className="text-center"><button className={`${unreadToggle ? 'btn btn-success':'btn btn-danger'}`}
+                                                onClick={toggleMessagesToShow}>Toggle Read/Unread</button></p>
+                <h4 className="fw-bold mb-2 text-center text-uppercase ">
+                    {unreadToggle? "Unread Messages": "Read Messages"}</h4>
 
-                {data.length>0 ? data.map((item, index)=>{
+                {dataToShow.length>0 ? dataToShow.map((item, index)=>{
                     return (
                         <Card className="shadow px-4 mb-2">
                             <Card.Body key={index}>
@@ -32,8 +101,10 @@ function ContactList() {
                                 <p><strong>Email</strong>: {item.email}</p>
                                 <p><strong>Topic</strong>: {item.subject}</p>
                                 <p><strong>Message</strong>: {item.message}</p>
-                                <p className="text-center"><button className={`${item.read ? 'btn btn-success':'btn btn-danger'}`}
-                                           onClick={(e)=>{handleStatus(e,item)}}>Mark as Read</button></p>
+                                <p className="text-center"><button className={`${!item.read ? 'btn btn-success':'btn btn-danger'}`}
+                                           onClick={(e)=>{toggleMessageRead(e,item)}}>
+                                    {item.read? "Mark unread": "Mark Read"}
+                                </button></p>
                             </Card.Body>
                         </Card>
                     )

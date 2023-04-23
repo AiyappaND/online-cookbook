@@ -136,7 +136,7 @@ function ProfileScreen() {
                                             <Form.Label className="text-center">
                                                 Premium User?
                                             </Form.Label>
-                                            <Form.Check type="checkbox" checked={profile.isPremium}
+                                            <Form.Check type="checkbox" checked={profile.isPremium} disabled={!profile.isAdmin}
                                                         onChange={(event) => {
                                                             const newProfile = {
                                                                 ...profile,
@@ -151,7 +151,7 @@ function ProfileScreen() {
                                             <Form.Label className="text-center">
                                                 Author?
                                             </Form.Label>
-                                            <Form.Check type="checkbox" checked={profile.isAuthor}
+                                            <Form.Check type="checkbox" checked={profile.isAuthor} disabled={!profile.isAdmin}
                                                         onChange={(event) => {
                                                             const newProfile = {
                                                                 ...profile,
@@ -228,7 +228,7 @@ function ProfileScreen() {
                                         <div className="d-grid">
                                             <Button variant="secondary" onClick={() => {
                                                 dispatch(logoutThunk());
-                                                navigate("/home");
+                                                navigate("/");
                                             }}>
                                                 Logout
                                             </Button>

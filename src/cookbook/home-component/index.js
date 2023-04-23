@@ -74,14 +74,14 @@ function Home() {
             <div className="row">
                 <p/>
             </div>
-<div className="mb-5"></div>
+            <div className="mb-5"></div>
             <div className="row center align-items-center">
                 <h2 className="fw-bold mb-2 text-uppercase ">
                     Latest Recipes
                 </h2>
             </div>
-            <div className="row center align-items-center">
-                <div className="col-4">
+            <div className="row center mb-2">
+                <div className="col-12">
                     <RecipeListLocal></RecipeListLocal>
                 </div>
             </div>

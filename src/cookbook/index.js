@@ -33,8 +33,7 @@ function Cookbook() {
                         <Navbar/>
                     <div className="row gx-4">
                         <Routes>
-                            <Route index
-                                   element={<Home/>}/>
+                            <Route exact path="/" element={<Home/>}/>
                             <Route path="profile" element={<Profile/>}/>
                             <Route path="contact" element={<Contact/>}/>
                             <Route path="about" element={<About/>}/>
@@ -49,7 +48,7 @@ function Cookbook() {
                             <Route path="profile/:username" element={<AnonymousProfileScreen/>}/>
                             <Route path="search/:searchTerm" element={<SearchResults/>}/>
                             <Route path="contact" element={<Contact/>}/>
-                            <Route path="admin/contact-list" element={<ContactList/>}/>
+                            <Route path="contactList" element={<ContactList/>}/>
                         </Routes>
                     </div>
                 </div>

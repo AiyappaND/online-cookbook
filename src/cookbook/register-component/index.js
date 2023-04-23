@@ -126,6 +126,21 @@ export default function RegisterComponent() {
 
                                         <Form.Group className="mb-3" controlId="isPremium">
                                             <Form.Label className="text-center">
+                                                Admin?
+                                            </Form.Label>
+                                            <Form.Check type="checkbox"
+                                                        onChange={(event) => {
+                                                            const latestUser = {
+                                                                ...newUser,
+                                                                isAdmin: event.target.checked,
+                                                            };
+                                                            setNewUser(latestUser);
+                                                        }}
+                                            />
+                                        </Form.Group>
+
+                                        <Form.Group className="mb-3" controlId="isPremium">
+                                            <Form.Label className="text-center">
                                                 Premium User?
                                             </Form.Label>
                                             <Form.Check type="checkbox"

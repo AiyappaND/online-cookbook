@@ -16,7 +16,7 @@ const NavBar = () => {
     const active = paths[1];
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a className="navbar-brand my-2 mx-4">Online Cookbook</a>
+            <div className="navbar-brand my-2 mx-4">Online Cookbook</div>
             <div className="collapse navbar-collapse">
                 <ul className="navbar-nav">
                     <li className={`nav-item ${active === ''?'active':''}`}>
@@ -49,11 +49,11 @@ const NavBar = () => {
                             About
                         </Link>
                     </li>
-                    <li className={`nav-item ${active === 'contact-list'?'active':''}`}>
-                        <Link to="admin/contact-list" className="nav-link">
-                            Contact List
+                    {(currentUser && currentUser?.isAdmin) && <li className={`nav-item ${active === 'contactList'?'active':''}`}>
+                        <Link to="contactList" className="nav-link">
+                            Feedback
                         </Link>
-                    </li>
+                    </li>}
                     <li className={`nav-item ${active === 'contact'?'active':''}`}>
                         <Link to="contact" className="nav-link">
                             Contact
