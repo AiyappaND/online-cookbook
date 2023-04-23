@@ -55,7 +55,8 @@ function Home() {
                 <p/>
             </div>
             <div className="row center align-items-center">
-                <h1 className="text-center">Welcome! Come join our community of recipes!</h1>
+                <div className="mb-5 mt-md-4"></div>
+                <h2 className="fw-bold mb-2 text-center text-uppercase ">Welcome! Come join our community of recipes!</h2>
                 <div className="col-2"></div>
                 <div className="col">
                     <div className="input-group">
@@ -65,7 +66,7 @@ function Home() {
                             setSearchTerm(term);
                         }
                         }/>
-                        <button type="button" className="btn btn-outline-danger" onClick={searchRecipes}>search</button>
+                        <button type="button" className="btn btn-primary" onClick={searchRecipes}>search</button>
                     </div>
                 </div>
                 <div className="col-2"></div>
@@ -73,14 +74,14 @@ function Home() {
             <div className="row">
                 <p/>
             </div>
-
+            <div className="mb-5"></div>
             <div className="row center align-items-center">
-                <h1>
+                <h2 className="fw-bold mb-2 text-uppercase ">
                     Latest Recipes
-                </h1>
+                </h2>
             </div>
-            <div className="row center align-items-center">
-                <div className="col-4">
+            <div className="row center mb-2">
+                <div className="col-12">
                     <RecipeListLocal></RecipeListLocal>
                 </div>
             </div>

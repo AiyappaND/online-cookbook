@@ -1,12 +1,14 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faThumbsDown, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
+import {faThumbsDown, faThumbsUp, faPhone} from "@fortawesome/free-solid-svg-icons";
+import React from "react";
 function About() {
     return(
         <>
             <div className="row text-center">
-                <h1>About Us</h1>
-                <p>                                                           </p>
+                <div className="mb-3 mt-md-4"></div>
+                <h2 className="fw-bold mb-2 text-center text-uppercase ">About Us</h2>
             </div>
+            <div className="mb-3"></div>
             <div className="row text-center">
                 <div className="col-4">
                     <div className="row center">
@@ -54,13 +56,14 @@ function About() {
                         <FontAwesomeIcon icon={faThumbsDown}/>
                     </div>
                     <div className="col-2">
-                        <FontAwesomeIcon icon={faThumbsUp}/>
+                        <FontAwesomeIcon icon={faPhone}/>
                     </div>
                     <div className="col"></div>
                 </div>
                 <div className="row center">
                     <h4> Follow Us! </h4>
                 </div>
+
             </div>
         </>
     );

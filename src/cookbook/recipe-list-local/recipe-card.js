@@ -10,7 +10,7 @@ const RecipeCard = (
 ) => {
     const navigate = useNavigate();
     return(
-        <Card style={{ width: '18rem' }}>
+        <Card className="mb-2" style={{ width: '18rem' }}>
             {
                 (recipe.local_source &&
                     <Card.Img className="p-3" variant="top" src={`/images/${(recipe.image? recipe.image: "cooking.png")}`} />

@@ -21,6 +21,7 @@ import AnonymousProfileScreen from "./anonymous-profile-component";
 import bookmarkReducer from "./reducers/bookmark-reducer";
 import SearchResults from "./search-results-component";
 import ViewRemoteRecipe from "./view-remote-recipes";
+import ContactList from "./contact-list-component";
 
 const store = configureStore(
     {reducer: {user: authReducer, recipeData: recipeReducer, bookmarkData: bookmarkReducer}});
@@ -32,8 +33,7 @@ function Cookbook() {
                         <Navbar/>
                     <div className="row gx-4">
                         <Routes>
-                            <Route index
-                                   element={<Home/>}/>
+                            <Route exact path="/" element={<Home/>}/>
                             <Route path="profile" element={<Profile/>}/>
                             <Route path="contact" element={<Contact/>}/>
                             <Route path="about" element={<About/>}/>
@@ -47,6 +47,8 @@ function Cookbook() {
                             <Route path ="remoteRecipe/:searchTerm/:rid" element={<ViewRemoteRecipe/>}></Route>
                             <Route path="profile/:username" element={<AnonymousProfileScreen/>}/>
                             <Route path="search/:searchTerm" element={<SearchResults/>}/>
+                            <Route path="contact" element={<Contact/>}/>
+                            <Route path="contactList" element={<ContactList/>}/>
                         </Routes>
                     </div>
                 </div>
